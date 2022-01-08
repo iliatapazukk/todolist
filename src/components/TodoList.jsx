@@ -1,16 +1,16 @@
 import React from 'react'
 import { FormGroup } from '@mui/material'
 import TodoItem from './TodoItem'
+import {useSelector} from 'react-redux';
 
-const TodoList = ({todos, toggleCompleted, removeTodo}) => {
+const TodoList = () => {
+  const todos = useSelector(state => state.todos.todos);
+  console.log('!!! todos:', todos)
   return (
     <div className="TodoList">
       <FormGroup>
         {todos.map(todo =>
-          <TodoItem
-            toggleCompleted={toggleCompleted}
-            removeTodo={removeTodo}
-            key={todo.id} {...todo} />
+          <TodoItem key={todo.id} value={todo.value} {...todo} />
         )}
       </FormGroup>
     </div>

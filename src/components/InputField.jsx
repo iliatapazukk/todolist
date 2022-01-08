@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {Button, Box, TextField} from '@mui/material';
+import {Button, TextField} from '@mui/material';
 
-export function InputField({value, handleInput, handleSubmit}) {
+const InputField = ({value, handleInput, handleSubmit}) => {
   return (
     <>
       <TextField
@@ -12,7 +12,7 @@ export function InputField({value, handleInput, handleSubmit}) {
         minRows={4}
         sx={{marginBottom: 1}}
         value={value}
-        onChange={handleInput}
+        onChange={(event) => handleInput(event.target.value)}
       />
       <Button onClick={handleSubmit} variant="contained">Add to list</Button>
     </>

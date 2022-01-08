@@ -5,36 +5,15 @@ import {
 import './App.scss'
 import TodoList from './components/TodoList';
 import InputField from './components/InputField';
+import {useDispatch} from 'react-redux';
+import {addTodo} from './store/todoSlice';
 
 function App() {
-  const [todos, setTodos] = React.useState([])
   const [value, setValue] = React.useState('')
-  const handleChange = (event) => { setValue(event.target.value) }
-  const addTodo = () => {
-    if (!value.trim().length) return
-    setTodos([
-      ...todos,
-      {
-        id: new Date().toISOString(),
-        value,
-        completed: false,
-      }
-    ])
+  const dispatch = useDispatch()
+  const addTask = () => {
+    dispatch(addTodo({value}))
     setValue('')
-  }
-  const removeTodo = (id) => setTodos(todos.filter(todo => todo.id !== id))
-  const toggleCompleted = (id) => {
-    setTodos(
-      todos.map(
-        todo => {
-          if (todo.id !== id) return todo
-          return {
-            ...todo,
-            completed: !todo.completed
-          }
-        }
-      )
-    )
   }
   return (
     <Box className="App">
@@ -44,14 +23,10 @@ function App() {
         }}
       >
         <Box sx={{width: 1/2, display: 'flex', flexDirection: 'column', padding: 1}}>
-          <InputField value={value} handleSubmit={addTodo} handleInput={handleChange}/>
+          <InputField value={value} handleSubmit={addTask} handleInput={setValue}/>
         </Box>
         <Box sx={{ width: 1/2, display: 'flex', flexDirection: 'column', padding: 1}}>
-          <TodoList
-            todos={todos}
-            toggleCompleted={toggleCompleted}
-            removeTodo={removeTodo}
-          />
+          <TodoList/>
         </Box>
       </Box>
     </Box>
