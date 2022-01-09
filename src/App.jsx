@@ -7,6 +7,7 @@ import TodoList from './components/TodoList';
 import InputField from './components/InputField';
 import {useDispatch} from 'react-redux';
 import {addTodo} from './store/todoSlice';
+import {motion} from "framer-motion";
 
 function App() {
   const [value, setValue] = React.useState('')
@@ -18,6 +19,10 @@ function App() {
   return (
     <Box className="App">
       <Box
+        component={motion.div}
+        initial={{ opacity: 0}}
+        animate={{ opacity: 1}}
+        transition={{ duration: 1.5 }}
         sx={{
           display: 'flex', alignItems: 'flex-start', p: 1, m: 1, height: '100vh',
         }}

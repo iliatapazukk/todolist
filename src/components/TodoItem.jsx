@@ -6,7 +6,6 @@ import {removeTodo, toggleCompleted} from '../store/todoSlice';
 
 const TodoItem = ({id, completed, value}) => {
   const dispatch = useDispatch()
-
   return (
     <Box
       className="TodoItem"
