@@ -1,23 +1,29 @@
 import React from 'react'
-import {
-  Box,
-} from '@mui/material'
-import './App.scss'
+import { Box } from '@mui/material'
 import TodoList from './components/TodoList';
 import InputField from './components/InputField';
-import {useDispatch} from 'react-redux';
-import {addTodo} from './store/todoSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {addTodo, fetchTodos} from './store/todoSlice';
 import {motion} from "framer-motion";
+import './App.scss'
 
 function App() {
   const [value, setValue] = React.useState('')
   const dispatch = useDispatch()
+  const {status, error} = useSelector(state => state.todos)
   const addTask = () => {
     dispatch(addTodo({value}))
     setValue('')
   }
+  React.useEffect(() => {
+    dispatch(fetchTodos())
+  }, [dispatch])
+
+
   return (
     <Box className="App">
+      {status === 'loading' && <h2>Loading...</h2>}
+      {error && <h2>Error: {error}</h2>}
       <Box
         component={motion.div}
         initial={{ opacity: 0}}

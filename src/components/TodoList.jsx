@@ -23,20 +23,20 @@ const variants = {
 
 }
 const TodoList = () => {
-  const todos = useSelector(state => state.todos.todos);
+  const {todos} = useSelector(state => state.todos);
   return (
     <div className="TodoList">
       <FormGroup>
         <AnimatePresence>
-        {todos.map((todo, index) =>
+        {todos.map((todo) =>
           <motion.div
-            key={index}
+            key={todo.id}
             variants={variants}
             initial="initial"
             animate="added"
             exit="removed"
           >
-            <TodoItem key={todo.id} value={todo.value} {...todo} />
+            <TodoItem key={todo.id} title={todo.value} {...todo} />
           </motion.div>
         )}
         </AnimatePresence>
