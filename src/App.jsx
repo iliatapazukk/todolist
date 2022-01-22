@@ -3,7 +3,7 @@ import { Box } from '@mui/material'
 import TodoList from './components/TodoList';
 import InputField from './components/InputField';
 import {useDispatch, useSelector} from 'react-redux';
-import {addTodo, fetchTodos} from './store/todoSlice';
+import {addNewTodo, fetchTodos} from './store/todoSlice';
 import {motion} from "framer-motion";
 import './App.scss'
 
@@ -12,7 +12,7 @@ function App() {
   const dispatch = useDispatch()
   const {status, error} = useSelector(state => state.todos)
   const addTask = () => {
-    dispatch(addTodo({value}))
+    dispatch(addNewTodo(value))
     setValue('')
   }
   React.useEffect(() => {

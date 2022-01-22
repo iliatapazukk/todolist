@@ -2,7 +2,7 @@ import React from 'react';
 import {Box, Checkbox, FormControlLabel, IconButton, Typography} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {useDispatch} from 'react-redux';
-import {deleteTodo, toggleCompleted} from '../store/todoSlice';
+import {deleteTodo, toggleTodo} from '../store/todoSlice';
 
 const TodoItem = ({id, completed, title}) => {
   const dispatch = useDispatch()
@@ -20,7 +20,7 @@ const TodoItem = ({id, completed, title}) => {
         }}
         control={
           <Checkbox
-            onChange={() => dispatch(toggleCompleted({id}))}
+            onChange={() => dispatch(toggleTodo(id))}
             checked={completed}
             sx={{marginTop: -1}}
           />
@@ -32,7 +32,7 @@ const TodoItem = ({id, completed, title}) => {
       />
       <IconButton
         onClick={() => dispatch(deleteTodo(id))}
-        onChange={() => toggleCompleted(id)}
+        onChange={() => toggleTodo(id)}
         sx={{marginTop: -1}}
         aria-label="delete"
         size="small">
